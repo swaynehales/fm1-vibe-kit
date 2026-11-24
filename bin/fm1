@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SELF_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+KIT_ROOT="$(cd "$SELF_DIR/.." && pwd)"
+
+# shellcheck source=../scripts/_common.sh
+source "$KIT_ROOT/scripts/_common.sh"
+
+usage() {
+    cat <<EOF
+fm1 ($FM1_KIT_VERSION) - Universal M-VAVE FM-1 firmware dev-environment kit
+
+Usage:
+  fm1 <command> [options]
+
+Commands:
+  doctor    Read-only preflight check (host, container, cache, CoreMIDI, repo)
+  setup     Idempotent bootstrap (.venv, JieLi toolchain/SDK cache, Docker image)
+  exec      Run any command inside the linux/amd64 container with toolchain & SDK
+  shell     Open an interactive shell inside the linux/amd64 container
+  build     Build firmware (auto-detects build.sh, generates .sym, checks .pool)
+  test      Run host tests and Linux ASan/UBSan fuzzing when present
+  flash     Flash .fwsc over macOS CoreMIDI and archive ELF/symbols
+  crashes   Decode FM-1 flash crash log via macOS CoreMIDI (fm1_remote.py)
+  remote    Run fm1_remote.py commands over macOS CoreMIDI
+  clean     Remove local .cache/ and .venv/ (add --all to also remove image)
+
+Global options:
+  --help, -h       Show this help
+  --version, -v    Show version
+EOF
+}
+
+if [[ $# -eq 0 ]]; then
+    usage
+    exit 1
+fi
+
+cmd="$1"
+shift
+
+case "$cmd" in
+    -h|--help|help)
+        usage
+        exit 0
+        ;;
+    -v|--version)
+        echo "fm1 $FM1_KIT_VERSION"
+        exit 0
+        ;;
+    doctor|setup|exec|shell|build|test|flash|crashes|remote|clean)
+        exec "$KIT_ROOT/scripts/${cmd}.sh" "$@"
+        ;;
+    *)
+        die "unknown command: '$cmd' (run 'fm1 --help')"
+        ;;
+esac

@@ -1,0 +1,6 @@
+.venv/
+.cache/
+workspace/
+*.fwsc
+.DS_Store
+tmp/

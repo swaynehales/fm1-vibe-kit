@@ -1,4 +1,4 @@
-# FM1-vibe-kit
+# FM1 Vibe Kit
 
 <img width="256" height="256" alt="fm1-dev-kit" src="https://github.com/user-attachments/assets/a213fff4-8421-4811-a435-8de3aa39ef23" />
 

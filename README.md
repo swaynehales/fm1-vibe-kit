@@ -1,5 +1,8 @@
 # FM1-vibe-kit
 
+<img width="256" height="256" alt="fm1-dev-kit" src="https://github.com/user-attachments/assets/a213fff4-8421-4811-a435-8de3aa39ef23" />
+
+
 A universal macOS + container Layer 1 dev-environment kit for building, testing, flashing, and debugging custom M-VAVE FM-1 firmware.
 
 Built for the common open-source FM-1 stack centered on [`felucca-bsp`](https://github.com/hugelton/felucca-bsp) and [`fm1-base`](https://github.com/charlesvestal/fm1-base), with `fm1 exec` and `fm1 shell` supporting any FM-1 firmware lineage (`sloop-fm1`, `dinghy`, or raw AC79 C).
